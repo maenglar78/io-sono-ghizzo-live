@@ -1,0 +1,260 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
+  <meta name="theme-color" content="#0a0a0f" />
+  <meta name="description" content="Io Sono Ghizzo Live — il nuovo album live di Ghizzo. In uscita il 6 giugno 2026." />
+  <meta property="og:title" content="Io Sono Ghizzo Live" />
+  <meta property="og:description" content="Il nuovo album live di Ghizzo. Cinque tracce, una notte sola." />
+  <meta property="og:type" content="music.album" />
+  <meta property="og:image" content="assets/img/ghizzo-1.png" />
+  <title>Ghizzo — Io Sono Ghizzo Live</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Inter:wght@400;500;600;800&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="css/styles.css" />
+</head>
+<body>
+
+  <!-- ============ NAV ============ -->
+  <header class="nav" id="nav">
+    <a href="#home" class="nav__logo" aria-label="Ghizzo home">
+      <span class="logo-mark">G</span>
+      <span class="logo-text">GHIZZO</span>
+    </a>
+    <button class="nav__burger" id="navBurger" aria-label="Apri menu" aria-expanded="false">
+      <span></span><span></span><span></span>
+    </button>
+    <nav class="nav__links" id="navLinks">
+      <a href="#home">Nuovo Album</a>
+      <a href="#video">Video</a>
+      <a href="#discografia">Discografia</a>
+      <a href="#stampa">Rassegna Stampa</a>
+      <a href="#bio">Chi Sono</a>
+      <a href="#wall">Wall</a>
+    </nav>
+  </header>
+
+  <!-- ============ HOME / NUOVO ALBUM ============ -->
+  <section id="home" class="hero">
+    <div class="hero__bg" aria-hidden="true"></div>
+    <div class="hero__inner">
+      <p class="kicker">NUOVO ALBUM · LIVE</p>
+      <h1 class="hero__title">IO SONO<br/><span class="fluo">GHIZZO</span> LIVE</h1>
+      <p class="hero__sub">5 tracce registrate dal vivo. Una notte sola. Fuori a mezzanotte.</p>
+
+      <div class="countdown" id="countdown" aria-live="polite">
+        <div class="countdown__box"><span id="cdDays">--</span><small>GIORNI</small></div>
+        <div class="countdown__box"><span id="cdHours">--</span><small>ORE</small></div>
+        <div class="countdown__box"><span id="cdMins">--</span><small>MINUTI</small></div>
+        <div class="countdown__box"><span id="cdSecs">--</span><small>SECONDI</small></div>
+      </div>
+      <p class="countdown__caption" id="cdCaption">Uscita: 6 giugno 2026, 00:00 (ora italiana)</p>
+
+      <!-- BANNER PRIMO SINGOLO -->
+      <aside class="single-ad" id="singleAd">
+        <div class="single-ad__pulse" aria-hidden="true"></div>
+        <div class="single-ad__body">
+          <p class="single-ad__tag">PRIMO SINGOLO · GIÀ DISPONIBILE</p>
+          <h2 class="single-ad__title">«IO SONO GHIZZO»</h2>
+          <p class="single-ad__copy">
+            Il pezzo che dà il titolo all'album è <strong>fuori adesso</strong>.
+            Ascoltalo prima di tutti, mandalo agli amici, e aspetta con noi l'album completo a mezzanotte.
+          </p>
+          <a class="btn btn--fluo" href="https://suno.com/s/MITudM6UZla4yuOe" target="_blank" rel="noopener">
+            ASCOLTA IL SINGOLO ↗
+          </a>
+        </div>
+      </aside>
+
+      <div class="hero__cta">
+        <a class="btn btn--ghost" href="#tracklist">VEDI LA TRACKLIST</a>
+        <a class="btn btn--ghost" href="#wall">LASCIA UN MESSAGGIO</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ TRACKLIST ============ -->
+  <section id="tracklist" class="tracklist section">
+    <div class="section__head">
+      <h2 class="section__title">TRACKLIST</h2>
+      <p class="section__sub">Clicca un brano per leggere il testo e aprirlo su Suno</p>
+    </div>
+
+    <ol class="tracks" id="tracksNew">
+      <!-- popolato da js/app.js -->
+    </ol>
+  </section>
+
+  <!-- ============ VIDEO ============ -->
+  <section id="video" class="section section--alt">
+    <div class="section__head">
+      <h2 class="section__title">VIDEO</h2>
+      <p class="section__sub">Il videoclip ufficiale di «Io Sono Ghizzo» e i contenuti dietro le quinte</p>
+    </div>
+
+    <div class="video">
+      <div class="video__player" id="videoPlayer">
+        <div class="video__placeholder">
+          <div class="video__pulse" aria-hidden="true">▶</div>
+          <p class="video__placeholder-tag">IN ARRIVO</p>
+          <h3 class="video__placeholder-title">Il videoclip ufficiale di «Io Sono Ghizzo»</h3>
+          <p class="video__placeholder-copy">
+            Il video sarà pubblicato qui appena disponibile.<br/>
+            Resta sintonizzato.
+          </p>
+        </div>
+      </div>
+      <div class="video__meta">
+        <span class="video__kicker">VIDEOCLIP UFFICIALE</span>
+        <h3 class="video__title">Io Sono Ghizzo</h3>
+        <p class="video__desc">
+          Il primo singolo estratto dall'album «Io Sono Ghizzo Live». Diretto e montato
+          tra il parquet, le strade di Senago e le notti di Mirko Party Events.
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ DISCOGRAFIA ============ -->
+  <section id="discografia" class="section section--alt">
+    <div class="section__head">
+      <h2 class="section__title">DISCOGRAFIA</h2>
+      <p class="section__sub">Tutti gli album di Ghizzo</p>
+    </div>
+
+    <div class="albums">
+      <article class="album">
+        <div class="album__cover album__cover--live">
+          <span class="album__year">2026</span>
+          <span class="album__name">IO SONO<br/>GHIZZO LIVE</span>
+          <span class="album__tag">LIVE</span>
+        </div>
+        <div class="album__info">
+          <h3>Io Sono Ghizzo Live</h3>
+          <p class="album__meta">Album live · 5 tracce · 6 giugno 2026</p>
+          <ul class="album__tracklist" id="discoNew"></ul>
+        </div>
+      </article>
+
+      <article class="album">
+        <div class="album__cover album__cover--fluo">
+          <span class="album__year">2025</span>
+          <span class="album__name">GHIZZO<br/>FLUO</span>
+          <span class="album__tag">STUDIO</span>
+        </div>
+        <div class="album__info">
+          <h3>Ghizzo Fluo</h3>
+          <p class="album__meta">Album di debutto · 4 tracce · Febbraio 2025</p>
+          <ul class="album__tracklist" id="discoOld"></ul>
+        </div>
+      </article>
+    </div>
+  </section>
+
+  <!-- ============ RASSEGNA STAMPA ============ -->
+  <section id="stampa" class="section">
+    <div class="section__head">
+      <h2 class="section__title">RASSEGNA STAMPA</h2>
+      <p class="section__sub">Le voci della critica su Ghizzo</p>
+    </div>
+
+    <div class="press" id="pressList">
+      <!-- popolato da js/app.js -->
+    </div>
+  </section>
+
+  <!-- ============ CHI SONO ============ -->
+  <section id="bio" class="section section--alt">
+    <div class="section__head">
+      <h2 class="section__title">CHI SONO</h2>
+    </div>
+
+    <div class="bio">
+      <div class="bio__photo">
+        <img src="assets/img/ghizzo-2.png" alt="Ghizzo ritratto" loading="lazy" />
+      </div>
+      <div class="bio__text">
+        <p class="bio__lead">
+          Mi chiamano Ghizzo. Vengo da <strong>Senago</strong>, hinterland di Milano,
+          e sono nato nel <strong>2003</strong>.
+        </p>
+        <p>
+          Di giorno sto in <em>azienda di famiglia</em> e mi alleno col pallone in mano —
+          il <strong>basket</strong> è la prima cosa che mi ha insegnato a perdere bene
+          e a rialzarmi meglio. Di notte invece accendo la città: ho fondato
+          <strong>Mirko Party Events</strong>, l'organizzazione con cui produciamo
+          eventi privati in Lombardia da qualche anno.
+        </p>
+        <p>
+          La musica è arrivata dopo, come un riflesso di tutto il resto.
+          Nel febbraio del 2025 è uscito <strong>"Ghizzo Fluo"</strong>, il mio primo
+          album: quattro pezzi nati tra parcheggi vuoti, palestre e dopo-festa.
+          A giugno 2026 esce <strong>"Io Sono Ghizzo Live"</strong>, la versione che mi
+          assomiglia di più: le stesse canzoni, ma sudate, con la voce della gente sopra.
+        </p>
+        <p>
+          A settembre 2026 parto in tour nei principali palazzetti italiani.
+          Se ci sei, ci sei davvero.
+        </p>
+
+        <div class="bio__facts">
+          <div><span>NATO</span><strong>Senago (MI) · 2003</strong></div>
+          <div><span>FUORI DAL PALCO</span><strong>Basket · Azienda di famiglia</strong></div>
+          <div><span>EVENTI</span><strong>Mirko Party Events</strong></div>
+          <div><span>TOUR</span><strong>Settembre 2026 — palazzetti italiani</strong></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- TOUR DATES -->
+    <div class="tour">
+      <h3 class="tour__title">TOUR 2026 — DATE ANNUNCIATE</h3>
+      <ul class="tour__list" id="tourList"></ul>
+      <p class="tour__note">Biglietti disponibili a breve · ogni concerto è un pezzo del disco che cambia forma.</p>
+    </div>
+  </section>
+
+  <!-- ============ WALL ============ -->
+  <section id="wall" class="section">
+    <div class="section__head">
+      <h2 class="section__title">IL MURO</h2>
+      <p class="section__sub">Lascia un messaggio. Tutti lo vedranno. Stay fluo.</p>
+    </div>
+
+    <form class="wall-form" id="wallForm" autocomplete="off">
+      <label class="visually-hidden" for="wallName">Nome</label>
+      <input id="wallName" name="name" type="text" placeholder="Il tuo nome" required maxlength="40" />
+      <label class="visually-hidden" for="wallMsg">Messaggio</label>
+      <textarea id="wallMsg" name="message" placeholder="Scrivi qualcosa a Ghizzo…" required maxlength="240" rows="3"></textarea>
+      <button type="submit" class="btn btn--fluo" id="wallSubmit">APPENDI AL MURO</button>
+      <p class="wall-form__status" id="wallStatus" aria-live="polite"></p>
+    </form>
+
+    <div class="wall" id="wallGrid" aria-live="polite">
+      <p class="wall__loading">Caricamento muro…</p>
+    </div>
+  </section>
+
+  <!-- ============ FOOTER ============ -->
+  <footer class="footer">
+    <p>© 2026 Ghizzo · Senago, Italia</p>
+    <p class="footer__small">Sito non ufficiale di fan · contenuti dimostrativi</p>
+  </footer>
+
+  <!-- ============ LYRICS MODAL ============ -->
+  <div class="modal" id="lyricsModal" role="dialog" aria-modal="true" aria-labelledby="lyricsTitle" hidden>
+    <div class="modal__backdrop" data-close></div>
+    <div class="modal__card">
+      <button class="modal__close" aria-label="Chiudi" data-close>×</button>
+      <p class="modal__kicker" id="lyricsKicker">TESTO</p>
+      <h3 class="modal__title" id="lyricsTitle"></h3>
+      <pre class="modal__body" id="lyricsBody"></pre>
+      <a class="btn btn--fluo modal__cta" id="lyricsSuno" target="_blank" rel="noopener">ASCOLTA SU SUNO ↗</a>
+    </div>
+  </div>
+
+  <script type="module" src="js/app.js"></script>
+</body>
+</html>

@@ -1,0 +1,11 @@
+# Logs / OS junk
+.DS_Store
+Thumbs.db
+*.log
+
+# Editor
+.vscode/
+.idea/
+
+# Node (nel caso un giorno aggiungiamo build)
+node_modules/

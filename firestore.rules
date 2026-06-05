@@ -1,0 +1,33 @@
+// Regole Firestore per la collection "wall" del sito Ghizzo
+// Da incollare in: Firebase Console → Firestore Database → Rules
+//
+// - Chiunque può leggere il muro
+// - Chiunque può scrivere, ma con vincoli su nome/messaggio
+// - I documenti devono avere solo i 3 campi attesi
+// - Si vieta l'edit/delete dal client (manutenzione dalla console o backend)
+
+rules_version = '2';
+service cloud.firestore {
+  match /databases/{database}/documents {
+
+    match /wall/{messageId} {
+
+      // Lettura aperta a tutti
+      allow read: if true;
+
+      // Creazione: validata
+      allow create: if
+        request.resource.data.keys().hasOnly(['name', 'message', 'createdAt'])
+        && request.resource.data.name is string
+        && request.resource.data.message is string
+        && request.resource.data.name.size() > 0
+        && request.resource.data.name.size() <= 40
+        && request.resource.data.message.size() > 0
+        && request.resource.data.message.size() <= 240
+        && request.resource.data.createdAt == request.time;
+
+      // Niente modifiche o cancellazioni dal client
+      allow update, delete: if false;
+    }
+  }
+}
