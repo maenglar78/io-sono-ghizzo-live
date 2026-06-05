@@ -893,11 +893,17 @@ function renderDiscoNew() {
   discoNew.innerHTML = "";
   NEW_ALBUM.forEach(t => {
     const li = document.createElement("li");
+    li.className = "album__track";
     const available = isTrackAvailable(t);
     const linkHtml = available
       ? `<a href="${t.suno}" target="_blank" rel="noopener">SUNO ↗</a>`
       : `<span class="disco__locked" title="Disponibile dal 6 giugno alle 00:00">🔒 6 GIU · 00:00</span>`;
-    li.innerHTML = `<span>${t.title}${t.single && !isAlbumOut() ? ' <em class="disco__tag">SINGOLO</em>' : ''}</span>${linkHtml}`;
+    const tag = t.single && !isAlbumOut() ? ' <em class="disco__tag">SINGOLO</em>' : '';
+    li.innerHTML = `
+      <button type="button" class="album__tracktitle" data-id="${t.id}">${t.title}${tag} <span class="album__lyrtag">TESTO</span></button>
+      ${linkHtml}
+    `;
+    li.querySelector(".album__tracktitle").addEventListener("click", () => openLyrics(t));
     discoNew.appendChild(li);
   });
 }
