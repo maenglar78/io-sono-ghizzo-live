@@ -21,7 +21,7 @@ const RELEASE_DATE = new Date("2026-06-06T00:00:00+02:00"); // 00:00 CEST Italia
    - MP4 locale: { kind: "mp4",   src: "assets/video/io-sono-ghizzo.mp4", poster: "assets/img/ghizzo-1.png" }
    - Nessun video (mostra placeholder): { kind: "none" }
 */
-const VIDEO_CONFIG = { kind: "none" };
+const VIDEO_CONFIG = { kind: "youtube", id: "Xgrgmx19oVw" };
 
 const LYRICS = {
   "un-giorno-qualunque": `[Verse]
