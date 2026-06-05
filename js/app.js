@@ -812,6 +812,14 @@ const cdEls = {
   cap:   document.getElementById("cdCaption")
 };
 
+function isAlbumOut() {
+  return Date.now() >= RELEASE_DATE.getTime();
+}
+
+function isTrackAvailable(t) {
+  return t.available === true || isAlbumOut();
+}
+
 function tickCountdown() {
   const now = new Date();
   const diff = RELEASE_DATE - now;
@@ -820,6 +828,13 @@ function tickCountdown() {
     cdEls.days.textContent = cdEls.hours.textContent =
     cdEls.mins.textContent = cdEls.secs.textContent = "00";
     cdEls.cap.innerHTML = '<strong style="color:var(--fluo-3)">FUORI ORA</strong> · Io Sono Ghizzo Live è disponibile';
+    // Album appena uscito: passa lo stato a "tutto disponibile" una volta sola
+    if (!releaseTriggered) {
+      releaseTriggered = true;
+      renderTracklist();
+      renderDiscoNew();
+      renderHeroAd();
+    }
     return;
   }
   const s = Math.floor(diff / 1000);
@@ -832,42 +847,84 @@ function tickCountdown() {
   cdEls.mins.textContent  = String(m).padStart(2, "0");
   cdEls.secs.textContent  = String(sec).padStart(2, "0");
 }
+let releaseTriggered = false;
 tickCountdown();
 setInterval(tickCountdown, 1000);
 
 /* ============ TRACKLIST + DISCO ============ */
 
 const tracksNew = document.getElementById("tracksNew");
-NEW_ALBUM.forEach(t => {
-  const li = document.createElement("li");
-  li.className = "track" + (t.single ? " track--single" : "");
-  li.dataset.id = t.id;
+const discoNew  = document.getElementById("discoNew");
 
-  const badge = t.single
-    ? `<span class="track__badge track__badge--out">PRIMO SINGOLO · FUORI ORA</span>`
-    : `<span class="track__badge track__badge--soon">DAL 6 GIUGNO · 00:00</span>`;
+function renderTracklist() {
+  const out = isAlbumOut();
+  tracksNew.innerHTML = "";
+  NEW_ALBUM.forEach(t => {
+    const li = document.createElement("li");
+    const available = isTrackAvailable(t);
+    li.className = "track" + (t.single ? " track--single" : "") + (available && !t.single ? " track--out" : "");
+    li.dataset.id = t.id;
 
-  li.innerHTML = `
-    <span class="track__num"></span>
-    <div>
-      <div class="track__title">${t.title}</div>
-      <div class="track__meta">${badge}</div>
-    </div>
-    <span class="track__action">TESTO ↗</span>
-  `;
-  li.addEventListener("click", () => openLyrics(t));
-  tracksNew.appendChild(li);
-});
+    let badge;
+    if (out) {
+      badge = t.single
+        ? `<span class="track__badge track__badge--out">SINGOLO · FUORI ORA</span>`
+        : `<span class="track__badge track__badge--out">FUORI ORA</span>`;
+    } else {
+      badge = t.single
+        ? `<span class="track__badge track__badge--out">PRIMO SINGOLO · FUORI ORA</span>`
+        : `<span class="track__badge track__badge--soon">DAL 6 GIUGNO · 00:00</span>`;
+    }
 
-const discoNew = document.getElementById("discoNew");
-NEW_ALBUM.forEach(t => {
-  const li = document.createElement("li");
-  const linkHtml = t.available
-    ? `<a href="${t.suno}" target="_blank" rel="noopener">SUNO ↗</a>`
-    : `<span class="disco__locked" title="Disponibile dal 6 giugno alle 00:00">🔒 6 GIU · 00:00</span>`;
-  li.innerHTML = `<span>${t.title}${t.single ? ' <em class="disco__tag">SINGOLO</em>' : ''}</span>${linkHtml}`;
-  discoNew.appendChild(li);
-});
+    li.innerHTML = `
+      <span class="track__num"></span>
+      <div>
+        <div class="track__title">${t.title}</div>
+        <div class="track__meta">${badge}</div>
+      </div>
+      <span class="track__action">TESTO ↗</span>
+    `;
+    li.addEventListener("click", () => openLyrics(t));
+    tracksNew.appendChild(li);
+  });
+}
+
+function renderDiscoNew() {
+  discoNew.innerHTML = "";
+  NEW_ALBUM.forEach(t => {
+    const li = document.createElement("li");
+    const available = isTrackAvailable(t);
+    const linkHtml = available
+      ? `<a href="${t.suno}" target="_blank" rel="noopener">SUNO ↗</a>`
+      : `<span class="disco__locked" title="Disponibile dal 6 giugno alle 00:00">🔒 6 GIU · 00:00</span>`;
+    li.innerHTML = `<span>${t.title}${t.single && !isAlbumOut() ? ' <em class="disco__tag">SINGOLO</em>' : ''}</span>${linkHtml}`;
+    discoNew.appendChild(li);
+  });
+}
+
+function renderHeroAd() {
+  const ad = document.getElementById("singleAd");
+  if (!ad) return;
+  if (isAlbumOut()) {
+    ad.classList.add("single-ad--live");
+    ad.innerHTML = `
+      <div class="single-ad__pulse" aria-hidden="true"></div>
+      <div class="single-ad__body">
+        <p class="single-ad__tag">ALBUM COMPLETO · GIÀ DISPONIBILE</p>
+        <h2 class="single-ad__title">«IO SONO GHIZZO LIVE»</h2>
+        <p class="single-ad__copy">
+          L'album <strong>è fuori adesso</strong>. Cinque tracce live, una notte sola.
+          Aprilo su Suno, mettilo a palla, condividilo con chi vuoi.
+        </p>
+        <a class="btn btn--fluo" href="#tracklist">VAI ALLA TRACKLIST ↓</a>
+      </div>
+    `;
+  }
+}
+
+renderTracklist();
+renderDiscoNew();
+renderHeroAd();
 
 const discoOld = document.getElementById("discoOld");
 OLD_ALBUM.forEach(t => {
@@ -957,9 +1014,12 @@ const lyricsSuno  = document.getElementById("lyricsSuno");
 function openLyrics(track) {
   lyricsTitle.textContent = track.title;
   lyricsBody.textContent  = LYRICS[track.id] || "Testo non disponibile.";
-  if (track.available) {
+  const available = isTrackAvailable(track);
+  if (available) {
     lyricsSuno.href = track.suno;
-    lyricsSuno.textContent = track.single ? "ASCOLTA IL SINGOLO SU SUNO ↗" : "ASCOLTA SU SUNO ↗";
+    lyricsSuno.textContent = (track.single && !isAlbumOut())
+      ? "ASCOLTA IL SINGOLO SU SUNO ↗"
+      : "ASCOLTA SU SUNO ↗";
     lyricsSuno.classList.remove("is-disabled");
     lyricsSuno.removeAttribute("aria-disabled");
   } else {
