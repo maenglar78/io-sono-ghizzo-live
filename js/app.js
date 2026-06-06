@@ -848,8 +848,7 @@ function tickCountdown() {
   cdEls.secs.textContent  = String(sec).padStart(2, "0");
 }
 let releaseTriggered = false;
-tickCountdown();
-setInterval(tickCountdown, 1000);
+// tickCountdown viene avviato in fondo al file: a countdown scaduto chiama renderTracklist/renderDiscoNew/renderHeroAd, che dipendono da const dichiarate sotto.
 
 /* ============ TRACKLIST + DISCO ============ */
 
@@ -931,6 +930,9 @@ function renderHeroAd() {
 renderTracklist();
 renderDiscoNew();
 renderHeroAd();
+
+tickCountdown();
+setInterval(tickCountdown, 1000);
 
 const discoOld = document.getElementById("discoOld");
 OLD_ALBUM.forEach(t => {
